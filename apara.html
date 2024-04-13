@@ -1,0 +1,210 @@
+<DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styleee.css">
+</head>
+<style>   
+body{
+    background-color: #dda0dd;
+    font-family:Courier;
+    text-align:center;
+}
+    nav {
+        background: linear-gradient(to right, #ff6b6b, #556270);
+        padding: 10px 0;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    tr:nth-child(even) {
+    background-color: #ffd3e0;
+}
+tr:nth-child(odd) {
+    background-color: #ff80ab;
+}
+th {
+    background-color: #C8A2C8;
+}
+</style>
+<body>
+  <nav>
+    <ul>
+      <li><a href="menu1.html">Inicio</a></li>
+      <li><a href="apara.php">Inventario</a></li>
+    </ul>
+  </nav><br>
+<div class="header"><form method="POST" action="<?php echo$_SERVER['PHP_SELF'];?>">
+    <h1> MENÚ </h1>
+    <p>Selecciona la opcion de la que se desea saber los datos</p>
+    <H3><font color="WHITE"><marquee direction="left" style="background:pink">INVENTARIO </marquee></font></H3>
+    1.Computadoras<input type="radio" name="op"
+    value="1"><BR>
+    2.CPU<input type="radio" name="op"
+    value="2"><br>
+    3.Teclados<input type="radio" name="op"
+    value="3"><br>
+    4.Mouse <input type="radio" name="op"
+    value="4"><br>
+    <input type="submit" name="boton1" value="Enviar">
+    </form>
+    <?php
+if (isset($_POST['boton1'])){
+$a=$_POST['valor1'];
+$b=$_POST['valor2'];
+$op=$_POST['op'];
+switch($op)
+{
+
+    case"1":
+include ("conexioncom.php");
+$consulta="SELECT * FROM $tabla1";
+$resultado=mysqli_query($conexion,$consulta) or die ("tu tabla no es correcta");
+echo "<table border='1'>";
+echo "<TR>";
+echo "<TH> id </TH>";
+echo "<TH> memoria_ram </TH>";
+echo "<TH> marca </TH>";
+echo "<TH> conectores_USB </TH>";
+echo "<TH> precio </TH>";
+echo "</TR>";
+while ($columna=mysqli_fetch_array
+($resultado))
+{
+    echo "<TR>";
+    echo"<TD>".$columna ['id']."</TD>";
+    echo "<TD>".$columna['memoria_ram']
+    ."</TD>";
+    echo "<TD>".$columna['marca'].
+    "</TD>";
+    echo "<TD>".$columna['conectores_USB'].
+    "</TD>";
+    echo "<TD>".$columna['precio'].
+    "</TD>";
+    echo"</TR>";
+}
+    echo "</table>" ;
+    mysqli_close($conexion);
+    break;
+    
+    case"2":
+include ("conexioncom.php");
+$consulta="SELECT * FROM $tabla2";
+$resultado=mysqli_query($conexion,$consulta) or die ("tu tabla no es correcta");
+echo "<table border='1'>";
+echo "<TR>";
+echo "<TH> id </TH>";
+echo "<TH> marca </TH>";
+echo "<TH> disco_duro </TH>";
+echo "<TH> memoria_ram </TH>";
+echo "<TH> precio </TH>";
+echo "</TR>";
+
+while ($columna=mysqli_fetch_array
+($resultado))
+{
+    echo "<TR>";
+    echo"<TD>".$columna ['id']."</TD>";
+    echo "<TD>".$columna['marca']
+    ."</TD>";
+    echo "<TD>".$columna['disco_duro'].
+    "</TD>";
+    echo"<TD>".$columna ['memoria_ram']."</TD>";
+    echo"<TD>".$columna ['precio']."</TD>";
+    echo"</TR>";
+}
+    echo "</table>" ;
+    mysqli_close($conexion);
+    break;
+    
+    case"3":
+include ("conexioncom.php");
+$consulta="SELECT * FROM $tabla3";
+$resultado=mysqli_query($conexion,$consulta) or die ("tu tabla no es correcta");
+echo "<table border='1'>";
+echo "<TR>";
+echo "<TH> id </TH>";
+echo "<TH> marca </TH>";
+echo "<TH> num_teclas </TH>";
+echo "<TH> precio </TH>";
+echo "</TR>";
+
+while ($columna=mysqli_fetch_array
+($resultado))
+{
+    echo "<TR>";
+    echo"<TD>".$columna ['id']."</TD>";
+    echo "<TD>".$columna['marca']
+    ."</TD>";
+    echo "<TD>".$columna['num_teclas'].
+    "</TD>";
+    echo "<TD>".$columna['precio'].
+    "</TD>";
+    echo"</TR>";
+}
+    echo "</table>" ;
+    mysqli_close($conexion);
+    break;
+    
+    case"4":
+    include ("conexioncom.php");
+$consulta="SELECT * FROM $tabla4";
+$resultado=mysqli_query($conexion,$consulta) or die ("tu tabla no es correcta");
+echo "<table border='1'>";
+echo "<TR>";
+echo "<TH> id </TH>";
+echo "<TH> marca </TH>";
+echo "<TH> tipo </TH>";
+echo "<TH> ghz </TH>";
+echo "<TH> precio </TH>";
+echo "</TR>";
+
+while ($columna=mysqli_fetch_array
+($resultado))
+{
+    echo "<TR>";
+    echo"<TD>".$columna ['id']."</TD>";
+    echo "<TD>".$columna['marca']
+    ."</TD>";
+    echo "<TD>".$columna['tipo'].
+    "</TD>";
+    echo "<TD>".$columna['ghz'].
+    "</TD>";
+    echo "<TD>".$columna['precio'].
+    "</TD>";
+    echo"</TR>";
+}
+    echo "</table>" ;
+    mysqli_close($conexion);
+    break;
+} 
+}
+?>
+  <nav>
+    <ul>
+<li><p> Editar datos de </p></li><br>
+<li><a href="editat.php" style="color: PINK;"> Computadoras</a></li><br>
+<a href="editar2.php" style="color: PINK;"> CPU</a><br>
+<a href="editar3.php" style="color: PINK;"> Teclados</a><br>
+<a href="editar4.php" style="color: PINK;"> Mouse</a><br>
+    </ul>
+  </nav>
+</body>
+</html>
